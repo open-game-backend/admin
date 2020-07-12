@@ -18,12 +18,14 @@
 <script>
 export default {
   name: 'Login',
+
   data: function() {
     return {
         userId: '',
         errorMessage: ''
     }
   },
+
   methods: {
       postLogin: function () {
           this.$api.post('/open-game-backend-auth/login', {

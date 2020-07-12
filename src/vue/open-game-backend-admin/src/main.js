@@ -17,6 +17,7 @@ const store = new Vuex.Store({
     state: {
         token: ''
     },
+
     mutations: {
         setToken (state, newToken) {
             state.token = newToken
