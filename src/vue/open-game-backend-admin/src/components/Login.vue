@@ -8,9 +8,6 @@
             <label for="passwordInput">Password</label>
             <input type="password" class="form-control" id="passwordInput">
         </div>
-        <div class="alert alert-danger" role="alert" v-if="errorMessage">
-            {{ errorMessage }}
-        </div>
         <button type="button" v-on:click="postLogin" class="btn btn-primary">Login</button>
     </form>
 </template>
@@ -21,8 +18,7 @@ export default {
 
   data: function() {
     return {
-        userId: '',
-        errorMessage: ''
+        userId: ''
     }
   },
 
@@ -32,18 +28,18 @@ export default {
               'playerId': this.userId
           })
       .then(response => {
-          this.errorMessage = '';
+          this.$store.commit('setError', '');
 
-          this.$store.commit('setToken', response.data.token)
+          this.$emit('onLoggedIn', response.data.token);
       })
       .catch(error => {
           if (error.response) {
-            this.errorMessage = error.response.data.errorMessage;
+            this.$store.commit('setError', error.response.data.errorMessage);
           } else {
-            this.errorMessage = error.message;
+            this.$store.commit('setError', error.message);
           }
       });
       }
-    }
+  }
 }
 </script>

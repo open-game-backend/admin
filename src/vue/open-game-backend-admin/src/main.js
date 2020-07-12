@@ -15,12 +15,12 @@ Vue.prototype.$api = axios.create({
 
 const store = new Vuex.Store({
     state: {
-        token: ''
+        error: ''
     },
 
     mutations: {
-        setToken (state, newToken) {
-            state.token = newToken
+        setError (state, newError) {
+            state.error = newError
         }
     }
 });

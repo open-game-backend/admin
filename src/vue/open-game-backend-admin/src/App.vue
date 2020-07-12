@@ -3,16 +3,19 @@
     <div class="container">
       <h1>Open Game Backend - Admin</h1>
 
-      <Login v-if="!isLoggedIn()" />
+      <Error />
 
-      <Navigation v-if="isLoggedIn()" @onSelectedTabChanged="onSelectedTabChanged($event)"/>
+      <Login v-if="!loggedIn" @onLoggedIn="onLoggedIn($event) "/>
 
-      <component v-if="isLoggedIn()" v-bind:is="selectedTab"></component>
+      <Navigation v-if="loggedIn" @onSelectedTabChanged="onSelectedTabChanged($event) "/>
+
+      <component v-if="loggedIn" v-bind:is="selectedTab"></component>
     </div>
   </div>
 </template>
 
 <script>
+import Error from './components/Error.vue'
 import Navigation from './components/Navigation.vue'
 import Login from './components/Login.vue'
 import Servers from './components/Servers.vue'
@@ -23,11 +26,13 @@ export default {
 
   data: function() {
     return {
-        selectedTab: 'Servers'
+        selectedTab: 'Servers',
+        loggedIn: false
     }
   },
 
   components: {
+    Error,
     Navigation,
     Login,
     Servers,
@@ -35,8 +40,9 @@ export default {
   },
 
   methods: {
-    isLoggedIn: function() {
-      return this.$store.state.token;
+    onLoggedIn: function(token) {
+      this.$api.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+      this.loggedIn = true;
     },
 
     onSelectedTabChanged: function(selectedTab) {
