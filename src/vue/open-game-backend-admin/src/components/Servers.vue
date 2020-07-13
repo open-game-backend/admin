@@ -108,19 +108,10 @@ export default {
 
   methods: {
       getServers: function () {
-          this.$api.get('/open-game-backend-matchmaking/servers')
-      .then(response => {
-          this.$store.commit('setError', '')
-
-          this.servers = response.data.servers;
-      })
-      .catch(error => {
-          if (error.response) {
-            this.$store.commit('setError', error.response.data.errorMessage);
-          } else {
-            this.$store.commit('setError', error.message);
-          }
-      });
+          this.$api.get('/open-game-backend-matchmaking/servers',
+              response => {
+                  this.servers = response.data.servers;
+              });
       }
   }
 }

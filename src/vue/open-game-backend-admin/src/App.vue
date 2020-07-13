@@ -43,14 +43,14 @@ export default {
 
   methods: {
     onLoggedIn: function(token) {
-      this.$api.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+      this.$api.setJWT(token);
       this.loggedIn = true;
 
       this.selectedTab = 'Servers';
     },
 
     onLogout: function() {
-      delete this.$api.defaults.headers.common['Authorization'];
+      this.$api.removeJWT();
       this.loggedIn = false;
     },
 

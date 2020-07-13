@@ -24,21 +24,13 @@ export default {
 
   methods: {
       postLogin: function () {
-          this.$api.post('/open-game-backend-auth/login', {
-              'playerId': this.userId
-          })
-      .then(response => {
-          this.$store.commit('setError', '');
-
-          this.$emit('onLoggedIn', response.data.token);
-      })
-      .catch(error => {
-          if (error.response) {
-            this.$store.commit('setError', error.response.data.errorMessage);
-          } else {
-            this.$store.commit('setError', error.message);
-          }
-      });
+          this.$api.post('/open-game-backend-auth/login',
+              {
+                  'playerId': this.userId
+              },
+              response => {
+                  this.$emit('onLoggedIn', response.data.token);
+              });
       }
   }
 }

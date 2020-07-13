@@ -63,20 +63,11 @@ export default {
   },
 
   methods: {
-      getPlayers: function () {
-          this.$api.get('/open-game-backend-matchmaking/queue')
-      .then(response => {
-          this.$store.commit('setError', '')
-
+    getPlayers: function () {
+      this.$api.get('/open-game-backend-matchmaking/queue',
+        response => {
           this.players = response.data.players;
-      })
-      .catch(error => {
-          if (error.response) {
-            this.$store.commit('setError', error.response.data.errorMessage);
-          } else {
-            this.$store.commit('setError', error.message);
-          }
-      });
+        });
       }
   }
 }
