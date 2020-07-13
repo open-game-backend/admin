@@ -21,6 +21,8 @@ export default class API {
     }
 
     get(url, onSuccess) {
+        PubSub.publish('loading', true);
+
         this._axios.get(url)
             .then(response => {
                 this._handleSuccess(response, onSuccess);
@@ -31,6 +33,8 @@ export default class API {
     }
 
     post(url, data, onSuccess) {
+        PubSub.publish('loading', true);
+
         this._axios.post(url, data)
             .then(response => {
                 this._handleSuccess(response, onSuccess);
@@ -41,11 +45,15 @@ export default class API {
     }
 
     _handleSuccess(response, onSuccess) {
+        PubSub.publish('loading', false);
         PubSub.publish('error', '');
+
         onSuccess(response);
     }
 
     _handleError(error) {
+        PubSub.publish('loading', false);
+        
         if (error.response) {
             PubSub.publish('error', error.response.data.errorMessage);
         } else {
