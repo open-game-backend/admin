@@ -7,6 +7,9 @@
             <li class="nav-item">
                 <a v-bind:class="getNavLinkClass('Queue')" href="#" v-on:click="selectTab('Queue')">Queue</a>
             </li>
+            <li class="nav-item">
+                <a v-bind:class="getNavLinkClass('Logout')" href="#" v-on:click="selectTab('Logout')">Logout</a>
+            </li>
         </ul>
     </nav>
 </template>

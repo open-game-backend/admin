@@ -9,7 +9,7 @@
 
       <Navigation v-if="loggedIn" @onSelectedTabChanged="onSelectedTabChanged($event) "/>
 
-      <component v-if="loggedIn" v-bind:is="selectedTab"></component>
+      <component v-if="loggedIn" v-bind:is="selectedTab" @onLogout="onLogout"></component>
     </div>
   </div>
 </template>
@@ -20,6 +20,7 @@ import Navigation from './components/Navigation.vue'
 import Login from './components/Login.vue'
 import Servers from './components/Servers.vue'
 import Queue from './components/Queue.vue'
+import Logout from './components/Logout.vue'
 
 export default {
   name: 'App',
@@ -36,13 +37,21 @@ export default {
     Navigation,
     Login,
     Servers,
-    Queue
+    Queue,
+    Logout
   },
 
   methods: {
     onLoggedIn: function(token) {
       this.$api.defaults.headers.common['Authorization'] = 'Bearer ' + token;
       this.loggedIn = true;
+
+      this.selectedTab = 'Servers';
+    },
+
+    onLogout: function() {
+      delete this.$api.defaults.headers.common['Authorization'];
+      this.loggedIn = false;
     },
 
     onSelectedTabChanged: function(selectedTab) {
