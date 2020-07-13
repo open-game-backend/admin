@@ -2,13 +2,13 @@
     <nav>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a v-bind:class="getNavLinkClass('Servers')" href="#" v-on:click="selectTab('Servers')">Servers</a>
+                <a class="nav-link" v-bind:class="{ active: isTabSelected('Servers') }" href="#" v-on:click="selectTab('Servers')">Servers</a>
             </li>
             <li class="nav-item">
-                <a v-bind:class="getNavLinkClass('Queue')" href="#" v-on:click="selectTab('Queue')">Queue</a>
+                <a class="nav-link" v-bind:class="{ active: isTabSelected('Queue') }" href="#" v-on:click="selectTab('Queue')">Queue</a>
             </li>
             <li class="nav-item">
-                <a v-bind:class="getNavLinkClass('Logout')" href="#" v-on:click="selectTab('Logout')">Logout</a>
+                <a class="nav-link" v-bind:class="{ active: isTabSelected('Logout') }" href="#" v-on:click="selectTab('Logout')">Logout</a>
             </li>
         </ul>
     </nav>
@@ -37,10 +37,6 @@ export default {
 
     isTabSelected: function (tabName) {
         return this.selectedTab == tabName;
-    },
-
-    getNavLinkClass: function (tabName) {
-        return this.isTabSelected(tabName) ? "nav-link active" : "nav-link";
     }
   }
 }
