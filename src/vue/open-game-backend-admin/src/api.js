@@ -16,6 +16,10 @@ export default class API {
         delete this._axios.defaults.headers.common['Authorization'];
     }
 
+    isLoggedIn() {
+        return this._axios.defaults.headers.common['Authorization'];
+    }
+
     get(url, onSuccess) {
         this._axios.get(url)
             .then(response => {

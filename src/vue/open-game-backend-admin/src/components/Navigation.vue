@@ -2,13 +2,13 @@
     <nav>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" v-bind:class="{ active: isTabSelected('Servers') }" href="#" v-on:click="selectTab('Servers')">Servers</a>
+                <router-link to="/servers" class="nav-link" v-bind:class="{ active: isRoute('/servers') }">Servers</router-link>
             </li>
             <li class="nav-item">
-                <a class="nav-link" v-bind:class="{ active: isTabSelected('Queue') }" href="#" v-on:click="selectTab('Queue')">Queue</a>
+                <router-link to="/queue" class="nav-link" v-bind:class="{ active: isRoute('/queue') }">Queue</router-link>
             </li>
             <li class="nav-item">
-                <a class="nav-link" v-bind:class="{ active: isTabSelected('Logout') }" href="#" v-on:click="selectTab('Logout')">Logout</a>
+                <router-link to="/logout" class="nav-link" v-bind:class="{ active: isRoute('/logout') }">Logout</router-link>
             </li>
         </ul>
     </nav>
@@ -18,25 +18,9 @@
 export default {
   name: 'Navigation',
 
-  data: function() {
-    return {
-        selectedTab: 'Servers'
-    }
-  },
-
   methods: {
-    selectTab: function (tabName) {
-        if (this.isTabSelected(tabName)) {
-            return;
-        }
-
-        this.selectedTab = tabName;
-
-        this.$emit('onSelectedTabChanged', this.selectedTab)
-    },
-
-    isTabSelected: function (tabName) {
-        return this.selectedTab == tabName;
+    isRoute: function (tabName) {
+        return this.$route.path == tabName;
     }
   }
 }
