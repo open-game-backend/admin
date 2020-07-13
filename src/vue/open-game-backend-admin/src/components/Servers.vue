@@ -2,6 +2,12 @@
     <div>
         <h2>Servers</h2>
 
+        <div>
+            <button type="button" v-on:click="getServers" class="btn btn-primary">Refresh</button>
+        </div>
+
+        <p></p>
+
         <div v-for="server in servers" :key="server.id">
             <div class="row">
                 <div class="col-sm">
