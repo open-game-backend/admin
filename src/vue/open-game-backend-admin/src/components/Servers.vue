@@ -8,86 +8,91 @@
 
         <p></p>
 
-        <div v-for="server in servers" :key="server.id">
-            <div class="row">
-                <div class="col-sm">
-                    <strong>{{ server.id }}</strong>
+        <div v-if="servers.length > 0">
+            <div v-for="server in servers" :key="server.id">
+                <div class="row">
+                    <div class="col-sm">
+                        <strong>{{ server.id }}</strong>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    Max Players:
+                <div class="row">
+                    <div class="col-sm-2">
+                        Max Players:
+                    </div>
+                    <div class="col-sm">
+                        {{ server.maxPlayers }}
+                    </div>
                 </div>
-                <div class="col-sm">
-                    {{ server.maxPlayers }}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    Status:
+                <div class="row">
+                    <div class="col-sm-2">
+                        Status:
+                    </div>
+                    <div class="col-sm">
+                        {{ server.status }}
+                    </div>
                 </div>
-                <div class="col-sm">
-                    {{ server.status }}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    Version:
+                <div class="row">
+                    <div class="col-sm-2">
+                        Version:
+                    </div>
+                    <div class="col-sm">
+                        {{ server.version }}
+                    </div>
                 </div>
-                <div class="col-sm">
-                    {{ server.version }}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    Game Mode:
+                <div class="row">
+                    <div class="col-sm-2">
+                        Game Mode:
+                    </div>
+                    <div class="col-sm">
+                        {{ server.gameMode }}
+                    </div>
                 </div>
-                <div class="col-sm">
-                    {{ server.gameMode }}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    Region:
+                <div class="row">
+                    <div class="col-sm-2">
+                        Region:
+                    </div>
+                    <div class="col-sm">
+                        {{ server.region }}
+                    </div>
                 </div>
-                <div class="col-sm">
-                    {{ server.region }}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    IPv4 Address:
+                <div class="row">
+                    <div class="col-sm-2">
+                        IPv4 Address:
+                    </div>
+                    <div class="col-sm">
+                        {{ server.ipV4Address }}
+                    </div>
                 </div>
-                <div class="col-sm">
-                    {{ server.ipV4Address }}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    Port:
+                <div class="row">
+                    <div class="col-sm-2">
+                        Port:
+                    </div>
+                    <div class="col-sm">
+                        {{ server.port }}
+                    </div>
                 </div>
-                <div class="col-sm">
-                    {{ server.port }}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    Players:
-                </div>
-                <div class="col-sm">
-                    <ul>
-                        <li v-for="player in server.playerIds" :key="player">{{ player }}</li>
-                    </ul>
+                <div class="row">
+                    <div class="col-sm-2">
+                        Players:
+                    </div>
+                    <div class="col-sm">
+                        <ul>
+                            <li v-for="player in server.playerIds" :key="player">{{ player }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div v-else>
+            No servers found.
         </div>
     </div>
 </template>

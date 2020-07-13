@@ -7,43 +7,48 @@
         </div>
 
         <p></p>
-        
-        <div class="row">
-            <div class="col-sm">
-                <strong>ID</strong>
-            </div>
-            <div class="col-sm">
-                <strong>Version</strong>
-            </div>
-            <div class="col-sm">
-                <strong>Game Mode</strong>
-            </div>
-            <div class="col-sm">
-                <strong>Region</strong>
-            </div>
-            <div class="col-sm">
-                <strong>Status</strong>
-            </div>
-        </div>
 
-        <div v-for="player in players" :key="player.playerId">
+        <div v-if="players.length > 0">
             <div class="row">
                 <div class="col-sm">
-                    {{ player.playerId }}
+                    <strong>ID</strong>
                 </div>
                 <div class="col-sm">
-                    {{ player.version }}
+                    <strong>Version</strong>
                 </div>
                 <div class="col-sm">
-                    {{ player.gameMode }}
+                    <strong>Game Mode</strong>
                 </div>
                 <div class="col-sm">
-                    {{ player.region }}
+                    <strong>Region</strong>
                 </div>
                 <div class="col-sm">
-                    {{ player.status }}
+                    <strong>Status</strong>
                 </div>
             </div>
+
+            <div v-for="player in players" :key="player.playerId">
+                <div class="row">
+                    <div class="col-sm">
+                        {{ player.playerId }}
+                    </div>
+                    <div class="col-sm">
+                        {{ player.version }}
+                    </div>
+                    <div class="col-sm">
+                        {{ player.gameMode }}
+                    </div>
+                    <div class="col-sm">
+                        {{ player.region }}
+                    </div>
+                    <div class="col-sm">
+                        {{ player.status }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            No players found.
         </div>
     </div>
 </template>
