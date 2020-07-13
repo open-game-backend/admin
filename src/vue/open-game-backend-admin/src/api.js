@@ -1,8 +1,8 @@
 import axios from 'axios'
+import PubSub from 'pubsub-js'
 
 export default class API {
-    constructor(store) {
-        this._store = store;
+    constructor() {
         this._axios = axios.create({
             baseURL: 'http://localhost:9000'
         });
@@ -41,15 +41,15 @@ export default class API {
     }
 
     _handleSuccess(response, onSuccess) {
-        this._store.commit('setError', '');
+        PubSub.publish('error', '');
         onSuccess(response);
     }
 
     _handleError(error) {
         if (error.response) {
-            this._store.commit('setError', error.response.data.errorMessage);
+            PubSub.publish('error', error.response.data.errorMessage);
         } else {
-            this._store.commit('setError', error.message);
+            PubSub.publish('error', error.message);
         }
     }
 }

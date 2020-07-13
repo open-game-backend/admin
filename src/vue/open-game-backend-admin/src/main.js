@@ -16,21 +16,8 @@ Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(VueRouter)
 
-// Create store.
-const store = new Vuex.Store({
-    state: {
-        error: ''
-    },
-
-    mutations: {
-        setError (state, newError) {
-            state.error = newError
-        }
-    }
-});
-
 // Create API.
-const api = new API(store);
+const api = new API();
 Vue.prototype.$api = api;
 
 // Create routes.
@@ -56,6 +43,5 @@ router.beforeEach((to, from, next) => {
 // Create Vue instance.
 new Vue({
   render: h => h(App),
-  router,
-  store
+  router
 }).$mount('#app')
