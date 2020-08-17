@@ -1,0 +1,82 @@
+{
+  "id": "fd42242e-faea-4929-b28c-fc6d7636f733",
+  "version": "2.0",
+  "name": "Open Game Backend",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "734f1d7e-0e35-4690-99d0-742c360afafc",
+    "name": "Login",
+    "commands": [{
+      "id": "3fbd958d-ad1b-4d35-a0ca-b4483425a13c",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "921ade64-9378-4255-aab5-02782e3cae4e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1040",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3095a407-b42c-4583-acd2-8cc4408aed8a",
+      "comment": "",
+      "command": "click",
+      "target": "id=userIdInput",
+      "targets": [
+        ["id=userIdInput", "id"],
+        ["css=#userIdInput", "css:finder"],
+        ["xpath=//input[@id='userIdInput']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3b8296c5-8889-4ae8-b202-5abec3b7fe5e",
+      "comment": "",
+      "command": "type",
+      "target": "id=userIdInput",
+      "targets": [
+        ["id=userIdInput", "id"],
+        ["css=#userIdInput", "css:finder"],
+        ["xpath=//input[@id='userIdInput']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "dfa3cb31-20e7-4b00-aff9-1130ddfc490b"
+    }, {
+      "id": "d47a4f29-8fc7-45f5-9c00-65c73c7476b0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1c821097-cf71-4830-8f1a-34c068c657ca",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//h2[contains(.,'Servers')]",
+      "targets": [
+        ["css=h2", "css:finder"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Servers')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "3913c371-afd5-4eb5-bcfc-1e912ff30eee",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}
