@@ -22,7 +22,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-        registry-url: 'https://npm.pkg.github.com/open-game-backend'
+        registry-url: 'https://npm.pkg.github.com/open-game-backend/'
         # Required to apply registry-url: https://github.com/actions/setup-node/issues/73
         scope: '@open-game-backend'
 
@@ -42,6 +42,8 @@ jobs:
         path: dist
 
     - name: Publish package 
-      run: npm publish
+      run: |
+        npm config set scope "@open-game-backend"
+        npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
