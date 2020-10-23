@@ -23,6 +23,8 @@ jobs:
       with:
         node-version: '12.x'
         registry-url: 'https://npm.pkg.github.com'
+        # Required to apply registry-url: https://github.com/actions/setup-node/issues/73
+        scope: '@open-game-backend'
 
     - name: Install dependencies
       run: npm ci
