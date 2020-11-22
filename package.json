@@ -1,10 +1,10 @@
 {
   "name": "@open-game-backend/admin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/open-game-backend/admin",
   "bugs": "https://github.com/open-game-backend/admin/issues",
   "license": "MIT",
-  "files": ["dist/**"],
+  "files": ["dist/**", "public/**", "src/**", "babel.config.js"],
   "repository": "github:open-game-backend/admin",
   "private": false,
   "scripts": {
