@@ -5,9 +5,9 @@
 
       <Error />
       
-      <Navigation v-if="loggedIn" />
+      <Navigation v-if="isLoggedIn" />
 
-      <router-view @onLoggedIn="onLoggedIn" @onLogout="onLogout"></router-view>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -30,20 +30,11 @@ export default {
     Navigation
   },
 
-  methods: {
-    onLoggedIn: function(token) {
-      this.$api.setJWT(token);
-      this.loggedIn = true;
-
-      this.$router.push('/servers');
-    },
-
-    onLogout: function() {
-      this.$api.removeJWT();
-      this.loggedIn = false;
-
-      this.$router.push('/login');
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn
     }
   }
+
 }
 </script>

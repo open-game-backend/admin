@@ -40,8 +40,21 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+// Create store.
+const store = new Vuex.Store({
+    state: {
+        isLoggedIn: 0
+    },
+    mutations: {
+        setIsLoggedIn (state, newIsLoggedIn) {
+            state.isLoggedIn = newIsLoggedIn
+        }
+    }
+})
+
 // Create Vue instance.
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

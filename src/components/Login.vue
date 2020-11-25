@@ -29,7 +29,9 @@ export default {
                   'playerId': this.userId
               },
               response => {
-                  this.$emit('onLoggedIn', response.data.token);
+                  this.$api.setJWT(response.data.token);
+                  this.$store.commit('setIsLoggedIn', true)
+                  this.$router.push('/servers');
               });
       }
   }
