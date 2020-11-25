@@ -9,43 +9,27 @@
         <p></p>
 
         <div v-if="players.length > 0">
-            <div class="row">
-                <div class="col-sm">
-                    <strong>ID</strong>
-                </div>
-                <div class="col-sm">
-                    <strong>Version</strong>
-                </div>
-                <div class="col-sm">
-                    <strong>Game Mode</strong>
-                </div>
-                <div class="col-sm">
-                    <strong>Region</strong>
-                </div>
-                <div class="col-sm">
-                    <strong>Status</strong>
-                </div>
-            </div>
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Version</th>
+                        <th scope="col">Game Mode</th>
+                        <th scope="col">Region</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
 
-            <div v-for="player in players" :key="player.playerId">
-                <div class="row">
-                    <div class="col-sm">
-                        {{ player.playerId }}
-                    </div>
-                    <div class="col-sm">
-                        {{ player.version }}
-                    </div>
-                    <div class="col-sm">
-                        {{ player.gameMode }}
-                    </div>
-                    <div class="col-sm">
-                        {{ player.region }}
-                    </div>
-                    <div class="col-sm">
-                        {{ player.status }}
-                    </div>
-                </div>
-            </div>
+                <tbody>
+                    <tr v-for="player in players" :key="player.playerId">
+                        <th scope="row">{{ player.playerId }}</th>
+                        <td>{{ player.version }}</td>
+                        <td>{{ player.gameMode }}</td>
+                        <td>{{ player.region }}</td>
+                        <td>{{ player.status }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div v-else>
             No players found.

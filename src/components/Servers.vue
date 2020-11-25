@@ -9,87 +9,40 @@
         <p></p>
 
         <div v-if="servers.length > 0">
-            <div v-for="server in servers" :key="server.id">
-                <div class="row">
-                    <div class="col-sm">
-                        <strong>{{ server.id }}</strong>
-                    </div>
-                </div>
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Max Players</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Version</th>
+                        <th scope="col">Game Mode</th>
+                        <th scope="col">Region</th>
+                        <th scope="col">IPv4 Address</th>
+                        <th scope="col">Port</th>
+                        <th scope="col">Players</th>
+                    </tr>
+                </thead>
 
-                <div class="row">
-                    <div class="col-sm-2">
-                        Max Players:
-                    </div>
-                    <div class="col-sm">
-                        {{ server.maxPlayers }}
-                    </div>
-                </div>
+                <tbody>
+                    <tr v-for="server in servers" :key="server.id">
+                        <th scope="row">{{ server.id }}</th>
+                        <td>{{ server.maxPlayers }}</td>
+                        <td>{{ server.status }}</td>
+                        <td>{{ server.version }}</td>
+                        <td>{{ server.gameMode }}</td>
+                        <td>{{ server.region }}</td>
+                        <td>{{ server.ipV4Address }}</td>
+                        <td>{{ server.port }}</td>
+                        <td>
+                            <ul>
+                                <li v-for="player in server.playerIds" :key="player">{{ player }}</li>
+                            </ul>
+                        </td>
 
-                <div class="row">
-                    <div class="col-sm-2">
-                        Status:
-                    </div>
-                    <div class="col-sm">
-                        {{ server.status }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-2">
-                        Version:
-                    </div>
-                    <div class="col-sm">
-                        {{ server.version }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-2">
-                        Game Mode:
-                    </div>
-                    <div class="col-sm">
-                        {{ server.gameMode }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-2">
-                        Region:
-                    </div>
-                    <div class="col-sm">
-                        {{ server.region }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-2">
-                        IPv4 Address:
-                    </div>
-                    <div class="col-sm">
-                        {{ server.ipV4Address }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-2">
-                        Port:
-                    </div>
-                    <div class="col-sm">
-                        {{ server.port }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-2">
-                        Players:
-                    </div>
-                    <div class="col-sm">
-                        <ul>
-                            <li v-for="player in server.playerIds" :key="player">{{ player }}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div v-else>
             No servers found.
