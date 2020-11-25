@@ -29,8 +29,8 @@ components: {
   },
 
   methods: {
-    isRoute: function (tabName) {
-        return this.$route.path == tabName;
+    isRoute: function (routePath) {
+        return this.$route.path == routePath;
     }
   }
 }
