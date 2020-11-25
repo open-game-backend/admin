@@ -4,6 +4,7 @@
 
 <script>
 import PubSub from 'pubsub-js'
+import Topics from '../topics'
 
 export default {
   name: 'Loading',
@@ -15,7 +16,7 @@ export default {
   },
 
   mounted: function () {
-    PubSub.subscribe('loading', this.onLoading);
+    PubSub.subscribe(Topics.LOADING, this.onLoading);
   },
 
   methods: {

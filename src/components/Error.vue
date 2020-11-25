@@ -6,6 +6,7 @@
 
 <script>
 import PubSub from 'pubsub-js'
+import Topics from '../topics'
 
 export default {
   name: 'Error',
@@ -17,7 +18,7 @@ export default {
   },
 
   mounted: function () {
-    PubSub.subscribe('error', this.onError);
+    PubSub.subscribe(Topics.ERROR, this.onError);
   },
 
   methods: {

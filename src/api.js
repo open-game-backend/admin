@@ -1,5 +1,6 @@
 import axios from 'axios'
 import PubSub from 'pubsub-js'
+import Topics from './topics'
 
 export default class API {
     constructor() {
@@ -21,7 +22,7 @@ export default class API {
     }
 
     get(url, onSuccess) {
-        PubSub.publish('loading', true);
+        PubSub.publish(Topics.LOADING, true);
 
         this._axios.get(url)
             .then(response => {
@@ -33,7 +34,7 @@ export default class API {
     }
 
     post(url, data, onSuccess) {
-        PubSub.publish('loading', true);
+        PubSub.publish(Topics.LOADING, true);
 
         this._axios.post(url, data)
             .then(response => {
@@ -45,19 +46,19 @@ export default class API {
     }
 
     _handleSuccess(response, onSuccess) {
-        PubSub.publish('loading', false);
-        PubSub.publish('error', '');
+        PubSub.publish(Topics.LOADING, false);
+        PubSub.publish(Topics.ERROR, '');
 
         onSuccess(response);
     }
 
     _handleError(error) {
-        PubSub.publish('loading', false);
+        PubSub.publish(Topics.LOADING, false);
         
         if (error.response) {
-            PubSub.publish('error', error.response.data.errorMessage);
+            PubSub.publish(Topics.ERROR, error.response.data.errorMessage);
         } else {
-            PubSub.publish('error', error.message);
+            PubSub.publish(Topics.ERROR, error.message);
         }
     }
 }
