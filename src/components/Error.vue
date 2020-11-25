@@ -17,7 +17,7 @@ export default {
     }
   },
 
-  mounted: function () {
+  created: function () {
     PubSub.subscribe(Topics.ERROR, this.onError);
   },
 

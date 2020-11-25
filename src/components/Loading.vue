@@ -15,7 +15,7 @@ export default {
     }
   },
 
-  mounted: function () {
+  created: function () {
     PubSub.subscribe(Topics.LOADING, this.onLoading);
   },
 
