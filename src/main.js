@@ -1,6 +1,6 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Vuex from 'vuex'
-import VueRouter from 'vue-router'
 
 import App from './App.vue'
 
@@ -11,15 +11,6 @@ import Servers from './components/Servers.vue'
 import Queue from './components/Queue.vue'
 import Logout from './components/Logout.vue'
 
-Vue.config.productionTip = false
-
-Vue.use(Vuex)
-Vue.use(VueRouter)
-
-// Create API.
-const api = new API();
-Vue.prototype.$api = api;
-
 // Create routes.
 const routes = [
     { path: '/login', component: Login },
@@ -28,7 +19,8 @@ const routes = [
     { path: '/logout', component: Logout }
 ]
 
-const router = new VueRouter({
+const router = createRouter({
+    history: createWebHashHistory(),
     routes
 })
 
@@ -53,8 +45,13 @@ const store = new Vuex.Store({
 })
 
 // Create Vue instance.
-new Vue({
-  render: h => h(App),
-  router,
-  store
-}).$mount('#app')
+const app = createApp(App)
+    .use(router)
+    .use(store)
+
+// Create API.
+const api = new API();
+app.config.globalProperties.$api = api
+
+// Mount app.
+app.mount('#app')
