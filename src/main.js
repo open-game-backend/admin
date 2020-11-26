@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
-import Vuex from 'vuex'
 import { createRouter, createWebHistory } from 'vue-router'
+import { createStore } from "vuex";
+import createPersistedState from 'vuex-persistedstate'
 
 import App from './App.vue'
 
@@ -33,7 +34,11 @@ router.beforeEach((to, from, next) => {
 });
 
 // Create store.
-const store = new Vuex.Store({
+const store = new createStore({
+    plugins: [createPersistedState({
+        storage: window.sessionStorage,
+    })],
+
     state: {
         isLoggedIn: 0
     },
