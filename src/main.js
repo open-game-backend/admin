@@ -14,6 +14,7 @@ import Logout from './components/Logout.vue'
 
 // Create routes.
 const routes = [
+    { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
     { path: '/servers', component: Servers },
     { path: '/queue', component: Queue },
@@ -40,9 +41,15 @@ const store = new createStore({
     })],
 
     state: {
+        oAuthState: '',
         isLoggedIn: 0
     },
+
     mutations: {
+        setOAuthState (state, newOAuthState) {
+            state.oAuthState = newOAuthState
+        },
+
         setIsLoggedIn (state, newIsLoggedIn) {
             state.isLoggedIn = newIsLoggedIn
         }
@@ -58,5 +65,14 @@ const app = createApp(App)
 const api = new API();
 app.config.globalProperties.$api = api
 
-// Mount app.
-app.mount('#app')
+// Load config.
+// https://stackoverflow.com/questions/60114173/vue-js-with-an-external-configuration-file
+fetch(process.env.BASE_URL + "config.json")
+    .then((response) => {
+        response.json().then((config) => {
+            app.config.globalProperties.$config = config
+
+            // Mount app.
+            app.mount('#app')
+        })
+    })

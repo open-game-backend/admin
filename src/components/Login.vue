@@ -1,14 +1,7 @@
 <template>
+    <p>Please sign in using one of the following OAuth providers:</p>
     <form>
-        <div class="form-group">
-            <label for="userIdInput">User ID</label>
-            <input type="text" class="form-control" id="userIdInput" v-model="userId">
-        </div>
-        <div class="form-group">
-            <label for="passwordInput">Password</label>
-            <input type="password" class="form-control" id="passwordInput">
-        </div>
-        <button type="button" v-on:click="postLogin" class="btn btn-primary">Login</button>
+        <button type="button" v-on:click="loginWithGitHub" class="btn btn-primary">Login with GitHub</button>
     </form>
 </template>
 
@@ -16,23 +9,48 @@
 export default {
   name: 'Login',
 
+  mounted: function() {
+      if (this.$route.query.code != null && this.$route.query.state != null) {
+        if (this.$route.query.state === this.oAuthState) {
+          this.login(this.$route.query.code, this.$route.query.state)
+        }
+      }
+  },
+
   data: function() {
     return {
         userId: ''
     }
   },
 
+  computed: {
+    oAuthState() {
+      return this.$store.state.oAuthState
+    }
+  },
+
   methods: {
-      postLogin: function () {
-          this.$api.post('/open-game-backend-auth/login',
-              {
-                  'playerId': this.userId
-              },
-              response => {
-                  this.$api.setJWT(response.data.token);
-                  this.$store.commit('setIsLoggedIn', true)
-                  this.$router.push('/servers');
-              });
+      loginWithGitHub: function () {
+        // https://gist.github.com/6174/6062387
+        let newOAuthState = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        this.$store.commit('setOAuthState', newOAuthState) 
+
+        window.location.href = 'https://github.com/login/oauth/authorize?client_id=' + this.$config.githubClientId + '&state=' + newOAuthState
+      },
+
+      login: function(code, state) {
+        this.$api.post('/open-game-backend-auth/login',
+            {
+                'provider': 'github',
+                'key': code,
+                'context': state,
+                'role': "ROLE_ADMIN"
+            },
+            response => {
+                this.$api.setJWT(response.data.token);
+                this.$store.commit('setIsLoggedIn', true)
+                this.$router.push('/servers');
+            });
       }
   }
 }
