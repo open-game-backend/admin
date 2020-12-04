@@ -8,6 +8,7 @@ import App from './App.vue'
 import API from './api.js'
 
 import Login from './components/Login.vue'
+import FirstTimeSetup from './components/FirstTimeSetup.vue'
 import Servers from './components/Servers.vue'
 import Queue from './components/Queue.vue'
 import Logout from './components/Logout.vue'
@@ -16,6 +17,7 @@ import Logout from './components/Logout.vue'
 const routes = [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
+    { path: '/firstTimeSetup', component: FirstTimeSetup },
     { path: '/servers', component: Servers },
     { path: '/queue', component: Queue },
     { path: '/logout', component: Logout }

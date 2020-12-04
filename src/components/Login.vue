@@ -49,7 +49,12 @@ export default {
             response => {
                 this.$api.setJWT(response.data.token);
                 this.$store.commit('setIsLoggedIn', true)
-                this.$router.push('/servers');
+
+                if (response.data.firstTimeSetup === null || !response.data.firstTimeSetup) {
+                    this.$router.push('/servers');
+                } else {
+                    this.$router.push('/firstTimeSetup');
+                }
             });
       }
   }
