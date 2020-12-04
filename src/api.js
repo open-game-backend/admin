@@ -56,7 +56,11 @@ export default class API {
         PubSub.publish(Topics.LOADING, false);
         
         if (error.response) {
-            PubSub.publish(Topics.ERROR, error.response.data.errorMessage);
+            if (error.response.status === 403) {
+                PubSub.publish(Topics.ERROR, "Session expired");
+            } else {
+                PubSub.publish(Topics.ERROR, error.response.data.errorMessage);
+            }
         } else {
             PubSub.publish(Topics.ERROR, error.message);
         }
