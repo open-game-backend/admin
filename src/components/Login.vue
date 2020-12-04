@@ -47,13 +47,17 @@ export default {
                 'role': "ROLE_ADMIN"
             },
             response => {
-                this.$api.setJWT(response.data.token);
-                this.$store.commit('setIsLoggedIn', true)
+                if (response.data.locked === null || !response.data.locked) {
+                    this.$api.setJWT(response.data.token);
+                    this.$store.commit('setIsLoggedIn', true)
 
-                if (response.data.firstTimeSetup === null || !response.data.firstTimeSetup) {
-                    this.$router.push('/servers');
+                    if (response.data.firstTimeSetup === null || !response.data.firstTimeSetup) {
+                        this.$router.push('/servers');
+                    } else {
+                        this.$router.push('/firstTimeSetup');
+                    }
                 } else {
-                    this.$router.push('/firstTimeSetup');
+                    this.$router.push('/locked');
                 }
             });
       }

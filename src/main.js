@@ -13,29 +13,6 @@ import Servers from './components/Servers.vue'
 import Queue from './components/Queue.vue'
 import Logout from './components/Logout.vue'
 
-// Create routes.
-const routes = [
-    { path: '/', redirect: '/login' },
-    { path: '/login', component: Login },
-    { path: '/firstTimeSetup', component: FirstTimeSetup },
-    { path: '/servers', component: Servers },
-    { path: '/queue', component: Queue },
-    { path: '/logout', component: Logout }
-]
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes
-})
-
-router.beforeEach((to, from, next) => {
-    if (to.path !== '/login' && !api.isLoggedIn()) {
-        next({ path: '/login' });
-    } else {
-        next();
-    }
-});
-
 // Create store.
 const store = new createStore({
     plugins: [createPersistedState({
@@ -57,6 +34,29 @@ const store = new createStore({
         }
     }
 })
+
+// Create routes.
+const routes = [
+    { path: '/', redirect: '/login' },
+    { path: '/login', component: Login },
+    { path: '/firstTimeSetup', component: FirstTimeSetup },
+    { path: '/servers', component: Servers },
+    { path: '/queue', component: Queue },
+    { path: '/logout', component: Logout }
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
+
+router.beforeEach((to, from, next) => {
+    if (to.path !== '/login' && to.path !== '/locked' && !store.state.isLoggedIn) {
+        next({ path: '/login' });
+    } else {
+        next();
+    }
+});
 
 // Create Vue instance.
 const app = createApp(App)
