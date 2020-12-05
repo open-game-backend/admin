@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import User from '../model/user'
+
 export default {
   name: 'Login',
 
@@ -48,8 +50,12 @@ export default {
             },
             response => {
                 if (response.data.locked === null || !response.data.locked) {
+                    let loggedInAs = new User();
+                    loggedInAs.userId = response.data.userId
+                    loggedInAs.provider = response.data.provider
+
                     this.$api.setJWT(response.data.token);
-                    this.$store.commit('setIsLoggedIn', true)
+                    this.$store.commit('setLoggedInAs', loggedInAs)
 
                     if (response.data.firstTimeSetup === null || !response.data.firstTimeSetup) {
                         this.$router.push('/servers');

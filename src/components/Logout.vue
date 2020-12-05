@@ -17,7 +17,7 @@ export default {
   methods: {
       logout: function () {
           this.$api.removeJWT();
-          this.$store.commit('setIsLoggedIn', false)
+          this.$store.commit('setLoggedInAs', null)
           this.$router.push('/login');
       }
   }
