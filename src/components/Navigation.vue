@@ -8,9 +8,12 @@
                 <router-link to="/queue" class="nav-link" v-bind:class="{ active: isRoute('/queue') }">Queue</router-link>
             </li>
             <li class="nav-item">
+                <router-link to="/admins" class="nav-link" v-bind:class="{ active: isRoute('/admins') }">Admins</router-link>
+            </li>
+            <li class="nav-item">
                 <router-link to="/logout" class="nav-link" v-bind:class="{ active: isRoute('/logout') }">Logout</router-link>
             </li>
-            
+
             <li>
                 <Loading />
             </li>

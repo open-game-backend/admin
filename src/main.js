@@ -12,6 +12,7 @@ import FirstTimeSetup from './components/FirstTimeSetup.vue'
 import Locked from './components/Locked.vue'
 import Servers from './components/Servers.vue'
 import Queue from './components/Queue.vue'
+import Admins from './components/Admins.vue'
 import Logout from './components/Logout.vue'
 
 // Create store.
@@ -44,6 +45,7 @@ const routes = [
     { path: '/locked', component: Locked },
     { path: '/servers', component: Servers },
     { path: '/queue', component: Queue },
+    { path: '/admins', component: Admins },
     { path: '/logout', component: Logout }
 ]
 
