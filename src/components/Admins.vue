@@ -24,7 +24,10 @@
                         <th scope="row">{{ admin.userId }}</th>
                         <td>{{ admin.provider }}</td>
                         <td>{{ admin.locked ? 'Locked' : 'OK' }}</td>
-                        <td></td>
+                        <td>
+                            <a v-if="!admin.locked" href="#" v-on:click="lockAdmin(admin)">Lock</a>
+                            <a v-else href="#" v-on:click="unlockAdmin(admin)">Unlock</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -51,11 +54,34 @@ export default {
 
   methods: {
     getAdmins: function () {
-      this.$api.get('/open-game-backend-auth/admins',
-        response => {
-          this.admins = response.data.admins;
-        });
-      }
+        this.$api.get('/open-game-backend-auth/admins',
+            response => {
+                this.admins = response.data.admins;
+            }
+        );
+    },
+
+    lockAdmin: function (admin) {
+        this.$api.post('/open-game-backend-auth/lockPlayer',
+            {
+                'userId': admin.userId,
+                'provider': admin.provider
+            },
+            response => {
+                admin.locked = response.data.locked
+            });
+    },
+
+    unlockAdmin: function (admin) {
+        this.$api.post('/open-game-backend-auth/unlockPlayer',
+            {
+                'userId': admin.userId,
+                'provider': admin.provider
+            },
+            response => {
+                admin.locked = response.data.locked
+            });
+    },
   }
 }
 </script>
