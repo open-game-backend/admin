@@ -19,7 +19,7 @@
         </p>
         
         <div>
-            <router-link to="/servers" class="btn btn-primary" role="button">Continue</router-link>
+            <router-link to="/servers" class="btn btn-primary" role="button"><i class="fas fa-sign-in-alt"></i> Continue</router-link>
         </div>
     </div>
 </template>

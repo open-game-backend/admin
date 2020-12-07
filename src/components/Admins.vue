@@ -3,7 +3,7 @@
         <h2>Admins</h2>
 
         <div>
-            <button type="button" v-on:click="getAdmins" class="btn btn-primary">Refresh</button>
+            <button type="button" v-on:click="getAdmins" class="btn btn-primary"><i class="fas fa-sync"></i> Refresh</button>
         </div>
 
         <p></p>

@@ -5,7 +5,7 @@
         <p>Are you sure you want to logout?</p>
 
         <div>
-            <button type="button" v-on:click="logout" class="btn btn-primary">Logout</button>
+            <button type="button" v-on:click="logout" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </div>
 </template>

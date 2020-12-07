@@ -3,7 +3,7 @@
         <h2>Players</h2>
 
         <div>
-            <button type="button" v-on:click="getPlayers" class="btn btn-primary">Refresh</button>
+            <button type="button" v-on:click="getPlayers" class="btn btn-primary"><i class="fas fa-sync"></i> Refresh</button>
         </div>
 
         <p></p>

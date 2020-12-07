@@ -1,7 +1,7 @@
 <template>
     <p>Please sign in using one of the following OAuth providers:</p>
     <form>
-        <button type="button" v-on:click="loginWithGitHub" class="btn btn-primary">Login with GitHub</button>
+        <button type="button" v-on:click="loginWithGitHub" class="btn btn-primary"><i class="fab fa-github"></i> Login with GitHub</button>
     </form>
 </template>
 
