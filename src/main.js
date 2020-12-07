@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { createStore } from "vuex";
 import createPersistedState from 'vuex-persistedstate'
 
+import '@fortawesome/fontawesome-free/css/all.css'
+
 import App from './App.vue'
 
 import API from './api.js'
