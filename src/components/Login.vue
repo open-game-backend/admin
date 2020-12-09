@@ -3,13 +3,21 @@
     <form>
         <button type="button" v-on:click="loginWithGitHub" class="btn btn-primary"><i class="fab fa-github"></i> Login with GitHub</button>
     </form>
+
+    <Loading />
 </template>
 
 <script>
+import Loading from './Loading.vue'
+
 import User from '../model/user'
 
 export default {
   name: 'Login',
+
+  components: {
+    Loading
+  },
 
   mounted: function() {
       if (this.$route.query.code != null && this.$route.query.state != null) {
