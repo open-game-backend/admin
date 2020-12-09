@@ -1,4 +1,4 @@
-export default class Topics {
-    ERROR = 'error'
-    LOADING = 'loading'
+export default {
+    ERROR: 'error',
+    LOADING: 'loading'
 }
