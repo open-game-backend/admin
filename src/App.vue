@@ -34,7 +34,12 @@ export default {
     isLoggedIn() {
       return this.$store.state.loggedInAs != null
     }
-  }
+  },
 
+  created: function () {
+    if (this.$store.state.loggedInAs != null) {
+      this.$api.setJWT(this.$store.state.loggedInAs.token);
+    }
+  }
 }
 </script>

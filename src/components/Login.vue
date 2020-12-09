@@ -53,8 +53,9 @@ export default {
                     let loggedInAs = new User();
                     loggedInAs.userId = response.data.userId
                     loggedInAs.provider = response.data.provider
+                    loggedInAs.token = response.data.token
 
-                    this.$api.setJWT(response.data.token);
+                    this.$api.setJWT(loggedInAs.token);
                     this.$store.commit('setLoggedInAs', loggedInAs)
 
                     if (response.data.firstTimeSetup === null || !response.data.firstTimeSetup) {
