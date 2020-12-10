@@ -8,6 +8,8 @@
       <Navigation v-if="isLoggedIn" />
 
       <router-view></router-view>
+
+      <Footer />
     </div>
   </div>
 </template>
@@ -15,6 +17,7 @@
 <script>
 import Error from './components/Error.vue'
 import Navigation from './components/Navigation.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
@@ -27,7 +30,8 @@ export default {
 
   components: {
     Error,
-    Navigation
+    Navigation,
+    Footer
   },
 
   computed: {
