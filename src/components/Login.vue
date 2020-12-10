@@ -57,7 +57,7 @@ export default {
                 'role': "ROLE_ADMIN"
             },
             response => {
-                if (response.data.locked === null || !response.data.locked) {
+                if (response.data.locked == null || !response.data.locked) {
                     let loggedInAs = new User();
                     loggedInAs.userId = response.data.userId
                     loggedInAs.provider = response.data.provider
@@ -66,7 +66,7 @@ export default {
                     this.$api.setJWT(loggedInAs.token);
                     this.$store.commit('setLoggedInAs', loggedInAs)
 
-                    if (response.data.firstTimeSetup === null || !response.data.firstTimeSetup) {
+                    if (response.data.firstTimeSetup == null || !response.data.firstTimeSetup) {
                         this.$router.push('/servers');
                     } else {
                         this.$router.push('/firstTimeSetup');

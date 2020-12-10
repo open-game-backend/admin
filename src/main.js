@@ -57,7 +57,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.path !== '/login' && to.path !== '/locked' && store.state.loggedInAs === null) {
+    if (to.path !== '/login' && to.path !== '/locked' && store.state.loggedInAs == null) {
         next({ path: '/login' });
     } else {
         next();
