@@ -1,4 +1,5 @@
 export default {
     ERROR: 'error',
-    LOADING: 'loading'
+    LOADING: 'loading',
+    SESSION_EXPIRED: 'session_expired'
 }
