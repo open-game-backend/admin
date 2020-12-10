@@ -1,6 +1,6 @@
 <template>
-    <nav>
-        <ul class="nav nav-tabs">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <router-link to="/servers" class="nav-link" v-bind:class="{ active: isRoute('/servers') }">Servers</router-link>
             </li>
@@ -18,6 +18,10 @@
                 <Loading />
             </li>
         </ul>
+
+        <span class="navbar-text">
+            <small><i :class="authProvider"></i> {{ userId }}</small>
+        </span>
     </nav>
 </template>
 
@@ -25,16 +29,31 @@
 import Loading from './Loading.vue'
 
 export default {
-  name: 'Navigation',
+    name: 'Navigation',
 
-components: {
-    Loading
-  },
+    components: {
+        Loading
+    },
 
-  methods: {
-    isRoute: function (routePath) {
-        return this.$route.path == routePath;
+    computed: {
+        userId() {
+            return this.$store.state.loggedInAs.userId;
+        },
+
+        authProvider() {
+            switch (this.$store.state.loggedInAs.provider) {
+                case 'github':
+                    return "fab fa-github";
+            }
+
+            return "far fa-question-circle";
+        }
+    },
+
+    methods: {
+        isRoute: function (routePath) {
+            return this.$route.path == routePath;
+        }
     }
-  }
 }
 </script>
