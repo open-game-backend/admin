@@ -20,8 +20,8 @@
                 </thead>
 
                 <tbody>
-                    <tr v-for="admin in admins" :key="admin.userId">
-                        <th scope="row">{{ admin.userId }} <span v-if="isMe(admin)">(you)</span></th>
+                    <tr v-for="admin in admins" :key="admin.providerUserId">
+                        <th scope="row">{{ admin.providerUserId }} <span v-if="isMe(admin)">(you)</span></th>
                         <td>{{ admin.provider }}</td>
                         <td>{{ admin.locked ? 'Locked' : 'OK' }}</td>
                         <td>
@@ -64,8 +64,8 @@ export default {
     lockAdmin: function (admin) {
         this.$api.post('/open-game-backend-auth/lockPlayer',
             {
-                'userId': admin.userId,
-                'provider': admin.provider
+                'provider': admin.provider,
+                'providerUserId': admin.providerUserId,
             },
             response => {
                 admin.locked = response.data.locked
@@ -75,8 +75,8 @@ export default {
     unlockAdmin: function (admin) {
         this.$api.post('/open-game-backend-auth/unlockPlayer',
             {
-                'userId': admin.userId,
-                'provider': admin.provider
+                'provider': admin.provider,
+                'providerUserId': admin.providerUserId,
             },
             response => {
                 admin.locked = response.data.locked
@@ -85,7 +85,7 @@ export default {
 
     isMe: function (admin) {
         let loggedInAs = this.$store.state.loggedInAs;
-        return loggedInAs != null && admin.userId === loggedInAs.userId && admin.provider === loggedInAs.provider
+        return loggedInAs != null && admin.providerUserId === loggedInAs.providerUserId && admin.provider === loggedInAs.provider
     }
   }
 }

@@ -29,7 +29,7 @@ export default {
 
   data: function() {
     return {
-        userId: ''
+        providerUserId: ''
     }
   },
 
@@ -59,8 +59,8 @@ export default {
             response => {
                 if (response.data.locked == null || !response.data.locked) {
                     let loggedInAs = new User();
-                    loggedInAs.userId = response.data.userId
                     loggedInAs.provider = response.data.provider
+                    loggedInAs.providerUserId = response.data.providerUserId
                     loggedInAs.token = response.data.token
 
                     this.$api.setJWT(loggedInAs.token);

@@ -20,7 +20,7 @@
         </ul>
 
         <span class="navbar-text">
-            <small><i :class="authProvider"></i> {{ userId }}</small>
+            <small><i :class="authProvider"></i> {{ providerUserId }}</small>
         </span>
     </nav>
 </template>
@@ -36,8 +36,8 @@ export default {
     },
 
     computed: {
-        userId() {
-            return this.$store.state.loggedInAs.userId;
+        providerUserId() {
+            return this.$store.state.loggedInAs.providerUserId;
         },
 
         authProvider() {
