@@ -53,7 +53,7 @@ export default {
 
   methods: {
     getPlayers: function () {
-      this.$api.get('/open-game-backend-matchmaking/queue',
+      this.$api.get('/open-game-backend-matchmaking/admin/queue',
         response => {
           this.players = response.data.players;
         });

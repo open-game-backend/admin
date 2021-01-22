@@ -66,7 +66,7 @@ export default {
 
   methods: {
       getServers: function () {
-          this.$api.get('/open-game-backend-matchmaking/servers',
+          this.$api.get('/open-game-backend-matchmaking/client/servers',
               response => {
                   this.servers = response.data.servers;
               });

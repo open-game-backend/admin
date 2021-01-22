@@ -54,7 +54,7 @@ export default {
 
   methods: {
     getAdmins: function () {
-        this.$api.get('/open-game-backend-auth/admins',
+        this.$api.get('/open-game-backend-auth/admin/admins',
             response => {
                 this.admins = response.data.admins;
             }
@@ -62,7 +62,7 @@ export default {
     },
 
     lockAdmin: function (admin) {
-        this.$api.post('/open-game-backend-auth/lockPlayer',
+        this.$api.post('/open-game-backend-auth/admin/lockPlayer',
             {
                 'provider': admin.provider,
                 'providerUserId': admin.providerUserId,
@@ -73,7 +73,7 @@ export default {
     },
 
     unlockAdmin: function (admin) {
-        this.$api.post('/open-game-backend-auth/unlockPlayer',
+        this.$api.post('/open-game-backend-auth/admin/unlockPlayer',
             {
                 'provider': admin.provider,
                 'providerUserId': admin.providerUserId,
