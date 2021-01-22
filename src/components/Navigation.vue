@@ -2,6 +2,9 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+                <router-link to="/players" class="nav-link" v-bind:class="{ active: isRoute('/players') }"><i class="fas fa-users"></i> Players</router-link>
+            </li>
+            <li class="nav-item">
                 <router-link to="/servers" class="nav-link" v-bind:class="{ active: isRoute('/servers') }"><i class="fas fa-server"></i> Servers</router-link>
             </li>
             <li class="nav-item">

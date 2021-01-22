@@ -12,6 +12,7 @@ import API from './api.js'
 import Login from './components/Login.vue'
 import FirstTimeSetup from './components/FirstTimeSetup.vue'
 import Locked from './components/Locked.vue'
+import Players from './components/Players.vue'
 import Servers from './components/Servers.vue'
 import Queue from './components/Queue.vue'
 import Admins from './components/Admins.vue'
@@ -45,6 +46,7 @@ const routes = [
     { path: '/login', component: Login },
     { path: '/firstTimeSetup', component: FirstTimeSetup },
     { path: '/locked', component: Locked },
+    { path: '/players', component: Players },
     { path: '/servers', component: Servers },
     { path: '/queue', component: Queue },
     { path: '/admins', component: Admins },
