@@ -17,6 +17,7 @@ import Servers from './components/Servers.vue'
 import Queue from './components/Queue.vue'
 import Admins from './components/Admins.vue'
 import Logout from './components/Logout.vue'
+import Collection from './components/Collection.vue'
 
 // Create store.
 const store = new createStore({
@@ -47,6 +48,7 @@ const routes = [
     { path: '/firstTimeSetup', component: FirstTimeSetup },
     { path: '/locked', component: Locked },
     { path: '/players', component: Players },
+    { path: '/collection', component: Collection },
     { path: '/servers', component: Servers },
     { path: '/queue', component: Queue },
     { path: '/admins', component: Admins },
