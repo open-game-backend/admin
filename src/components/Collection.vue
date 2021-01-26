@@ -28,6 +28,8 @@
                     </tr>
                 </tbody>
             </table>
+
+            <button type="button" v-on:click="downloadItemDefinitions" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
         </div>
         <div v-else>
             No item definitions found.
@@ -41,6 +43,8 @@
             <ul>
                 <li v-for="tag in itemTags" :key="tag">{{ tag }}</li>
             </ul>
+
+            <button type="button" v-on:click="downloadItemTags" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
         </div>
         <div v-else>
             No item tags found.
@@ -49,6 +53,8 @@
 </template>
 
 <script>
+import FileSaver from 'file-saver';
+
 export default {
   name: 'Collection',
 
@@ -70,6 +76,20 @@ export default {
                   this.itemTags = response.data.itemTags;
                   this.itemDefinitions = response.data.itemDefinitions;
               });
+      },
+
+      downloadItemDefinitions: function () {
+        this.downloadAsJson(this.itemDefinitions, "ItemDefinitions.json");
+      },
+
+      downloadItemTags: function () {
+        this.downloadAsJson(this.itemTags, "ItemTags.json");
+      },
+
+      downloadAsJson: function (data, fileName) {
+        let json = JSON.stringify(data, null, 2);
+        let blob = new Blob([json], { type: "application/json;charset=utf-8" });
+        FileSaver.saveAs(blob, fileName);
       }
   }
 }
