@@ -4,6 +4,12 @@
 
         <div>
             <button type="button" v-on:click="getData" class="btn btn-primary"><i class="fas fa-sync"></i> Refresh</button>
+            <button type="button" v-on:click="downloadItemDefinitions" class="btn btn-primary"><i class="fas fa-download"></i> Download</button>
+
+            <label class="btn btn-primary btn-upload">
+                <i class="fas fa-upload"></i> Upload
+                <input type="file" accept="application/json" v-on:input="uploadItemDefinitions" hidden>
+            </label>
         </div>
 
         <p></p>
@@ -28,8 +34,6 @@
                     </tr>
                 </tbody>
             </table>
-
-            <button type="button" v-on:click="downloadItemDefinitions" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
         </div>
         <div v-else>
             No item definitions found.
@@ -43,8 +47,6 @@
             <ul>
                 <li v-for="tag in itemTags" :key="tag">{{ tag }}</li>
             </ul>
-
-            <button type="button" v-on:click="downloadItemTags" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
         </div>
         <div v-else>
             No item tags found.
@@ -79,11 +81,34 @@ export default {
       },
 
       downloadItemDefinitions: function () {
-        this.downloadAsJson(this.itemDefinitions, "ItemDefinitions.json");
+        this.downloadAsJson(
+            {
+                itemTags: this.itemTags,
+                itemDefinitions: this.itemDefinitions
+            },
+            "ItemDefinitions.json");
       },
 
-      downloadItemTags: function () {
-        this.downloadAsJson(this.itemTags, "ItemTags.json");
+      uploadItemDefinitions: function (event) {
+        if (event.target.files.length <= 0) {
+            event.target.value = null;
+            return;
+        }
+
+        const fileReader = new FileReader();
+
+        fileReader.onload = e => {
+            const fileContents = JSON.parse(e.target.result);
+
+            this.$api.put('/open-game-backend-collection/admin/itemdefinitions', fileContents,
+              () => {
+                  this.itemTags = fileContents.itemTags;
+                  this.itemDefinitions = fileContents.itemDefinitions;
+              });
+        }
+        fileReader.readAsText(event.target.files.item(0));
+
+        event.target.value = null;
       },
 
       downloadAsJson: function (data, fileName) {
@@ -98,5 +123,13 @@ export default {
 <style scoped>
     .badge {
         margin-right: 0.5em;
+    }
+
+    .btn {
+        margin-right: 0.5em;    
+    }
+
+    .btn-upload {
+        margin-bottom: 0;
     }
 </style>

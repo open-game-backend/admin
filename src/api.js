@@ -45,6 +45,18 @@ export default class API {
             });
     }
 
+    put(url, data, onSuccess) {
+        PubSub.publish(Topics.LOADING, true);
+
+        this._axios.put(url, data)
+            .then(response => {
+                this._handleSuccess(response, onSuccess);
+            })
+            .catch(error => {
+                this._handleError(error);
+            });
+    }
+
     _handleSuccess(response, onSuccess) {
         PubSub.publish(Topics.LOADING, false);
         PubSub.publish(Topics.ERROR, '');
