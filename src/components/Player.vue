@@ -41,7 +41,9 @@
                     <tr v-for="item in collection" :key="item.id">
                         <th scope="row">{{ item.id }}</th>
                         <td scope="row">{{ item.count }}</td>
-                        <td scope="row"></td>
+                        <td scope="row">
+                            <button type="button" title="Remove" v-on:click="removeItem(item)" class="btn btn-secondary btn-sm"><i class="fas fa-trash"></i></button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -93,6 +95,12 @@ export default {
             }
 
             this.$api.post('/open-game-backend-collection/admin/collection/' + this.playerId + '/items', this.newItem,
+                () => { this.getData(); }
+            );
+      },
+
+      removeItem: function (item) {
+            this.$api.delete('/open-game-backend-collection/admin/collection/' + this.playerId + '/items/' + item.id,
                 () => { this.getData(); }
             );
       }
