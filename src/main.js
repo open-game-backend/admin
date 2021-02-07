@@ -13,6 +13,7 @@ import Login from './components/Login.vue'
 import FirstTimeSetup from './components/FirstTimeSetup.vue'
 import Locked from './components/Locked.vue'
 import Players from './components/Players.vue'
+import Player from './components/Player.vue'
 import Servers from './components/Servers.vue'
 import Queue from './components/Queue.vue'
 import Admins from './components/Admins.vue'
@@ -48,6 +49,7 @@ const routes = [
     { path: '/firstTimeSetup', component: FirstTimeSetup },
     { path: '/locked', component: Locked },
     { path: '/players', component: Players },
+    { path: '/players/:playerId', name: 'player', component: Player },
     { path: '/collection', component: Collection },
     { path: '/servers', component: Servers },
     { path: '/queue', component: Queue },

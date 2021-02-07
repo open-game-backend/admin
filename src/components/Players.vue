@@ -27,7 +27,9 @@
 
                 <tbody>
                     <tr v-for="player in players" :key="player.playerId">
-                        <th scope="row">{{ player.playerId }}</th>
+                        <th scope="row">
+                            <router-link :to="getPlayerLink(player)">{{ player.playerId }}</router-link>
+                        </th>
                         <td>{{ player.provider }}</td>
                         <td>{{ player.providerUserId }}</td>
                         <td>
@@ -112,6 +114,15 @@ export default {
 
         isCurrentPage(page) {
             return (page - 1) == this.currentPage;
+        },
+
+        getPlayerLink (player) {
+            return {
+                name: 'player',
+                params: {
+                    playerId: player.playerId
+                }
+            }
         }
     }
 }
