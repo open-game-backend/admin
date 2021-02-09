@@ -34,7 +34,10 @@
                             <input type="number" min="1" v-model="newItem.itemCount" />
                         </td>
                         <td scope="row">
-                            <button type="button" title="Add" v-on:click="addItem" class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i></button>
+                            <button type="button" title="Add" v-on:click="addItem" class="btn btn-secondary btn-sm"
+                                :disabled="newItem.itemDefinitionId == '' || newItem.itemCount <= 0">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </td>
                     </tr>
 
