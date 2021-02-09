@@ -38,19 +38,6 @@
         <div v-else>
             No item definitions found.
         </div>
-
-        <p></p>
-
-        <h4>Item Tags</h4>
-
-        <div v-if="itemTags.length > 0">
-            <ul>
-                <li v-for="tag in itemTags" :key="tag">{{ tag }}</li>
-            </ul>
-        </div>
-        <div v-else>
-            No item tags found.
-        </div>
     </div>
 </template>
 
@@ -62,7 +49,6 @@ export default {
 
   data: function() {
     return {
-        itemTags: [],
         itemDefinitions: []
     }
   },
@@ -75,7 +61,6 @@ export default {
       getData: function () {
           this.$api.get('/open-game-backend-collection/admin/itemdefinitions',
               response => {
-                  this.itemTags = response.data.itemTags;
                   this.itemDefinitions = response.data.itemDefinitions;
               });
       },
@@ -83,7 +68,6 @@ export default {
       downloadItemDefinitions: function () {
         this.downloadAsJson(
             {
-                itemTags: this.itemTags,
                 itemDefinitions: this.itemDefinitions
             },
             "ItemDefinitions.json");
@@ -102,7 +86,6 @@ export default {
 
             this.$api.put('/open-game-backend-collection/admin/itemdefinitions', fileContents,
               () => {
-                  this.itemTags = fileContents.itemTags;
                   this.itemDefinitions = fileContents.itemDefinitions;
               });
         }
