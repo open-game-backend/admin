@@ -149,4 +149,8 @@ export default {
 </script>
 
 <style scoped>
+    .btn-sm {
+        width: 3em;
+        margin-right: 0.5em;
+    }
 </style>
