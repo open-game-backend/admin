@@ -63,6 +63,14 @@
                 </tbody>
             </table>
         </div>
+
+        <h4>Claimed Item Sets</h4>
+
+        <div>
+            <ul>
+                <li v-for="claimedItemSet in claimedItemSets" :key="claimedItemSet">{{ claimedItemSet }}</li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -74,6 +82,7 @@ export default {
         return {
             collection: [],
             itemDefinitions: [],
+            claimedItemSets: [],
             newItem: {
                 itemDefinitionId: "",
                 itemCount: 1
@@ -100,13 +109,16 @@ export default {
             this.$api.get('/open-game-backend-collection/admin/collection/' + this.playerId,
                 response => {
                     this.collection = response.data.collection;
-
-                    console.log(this.collection[0].id)
                 });
             
             this.$api.get('/open-game-backend-collection/admin/itemdefinitions',
                 response => {
                     this.itemDefinitions = response.data.itemDefinitions;
+                });
+
+            this.$api.get('/open-game-backend-collection/admin/claimeditemsets/' + this.playerId,
+                response => {
+                    this.claimedItemSets = response.data.claimedItemSets;
                 });
         },
 
