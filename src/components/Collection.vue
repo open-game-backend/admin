@@ -77,6 +77,45 @@
         <div v-else>
             No item sets found.
         </div>
+
+        <h4>Loadout Types</h4>
+
+        <div>
+            <button type="button" v-on:click="downloadLoadoutTypes" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
+
+            <label class="btn btn-primary btn-sm btn-upload">
+                <i class="fas fa-upload"></i> Upload
+                <input type="file" accept="application/json" v-on:input="uploadLoadoutTypes" hidden>
+            </label>
+        </div>
+        <div v-if="loadoutTypes.length > 0">
+            <div v-for="loadoutType in loadoutTypes" :key="loadoutType.id">
+                <h6>{{ loadoutType.id }} </h6>
+
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item Tag</th>
+                            <th scope="col">Min Total</th>
+                            <th scope="col">Max Total</th>
+                            <th scope="col">Max Copies</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr v-for="loadoutRule in loadoutType.rules" :key="loadoutRule.itemTag">
+                            <th scope="row">{{ loadoutRule.itemTag }}</th>
+                            <td scope="row">{{ loadoutRule.minTotal }}</td>
+                            <td scope="row">{{ loadoutRule.maxTotal }}</td>
+                            <td scope="row">{{ loadoutRule.maxCopies }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div v-else>
+            No loadout types found.
+        </div>
     </div>
 </template>
 
@@ -89,7 +128,8 @@ export default {
     data: function() {
         return {
             itemDefinitions: [],
-            itemSets: []
+            itemSets: [],
+            loadoutTypes: []
         }
     },
 
@@ -107,6 +147,11 @@ export default {
             this.$api.get('/open-game-backend-collection/admin/itemsets',
                 response => {
                     this.itemSets = response.data.itemSets;
+                });
+
+            this.$api.get('/open-game-backend-collection/admin/loadouttypes',
+                response => {
+                    this.loadoutTypes = response.data.loadoutTypes;
                 });
         },
 
@@ -126,6 +171,14 @@ export default {
                 "ItemSets.json");
         },
 
+        downloadLoadoutTypes: function () {
+            this.downloadAsJson(
+                {
+                    loadoutTypes: this.loadoutTypes
+                },
+                "LoadoutTypes.json");
+        },
+
         downloadAsJson: function (data, fileName) {
             let json = JSON.stringify(data, null, 2);
             let blob = new Blob([json], { type: "application/json;charset=utf-8" });
@@ -141,6 +194,12 @@ export default {
         uploadItemSets: function (event) {
             this.uploadAsJson(event, '/open-game-backend-collection/admin/itemsets', (fileContents) => {
                 this.itemSets = fileContents.itemSets;
+            });
+        },
+
+        uploadLoadoutTypes: function (event) {
+            this.uploadAsJson(event, '/open-game-backend-collection/admin/loadouttypes', (fileContents) => {
+                this.loadoutTypes = fileContents.loadoutTypes;
             });
         },
 
