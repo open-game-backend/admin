@@ -24,15 +24,20 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Tags</th>
+                        <th scope="col">Max Count</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr v-for="itemDefinition in itemDefinitions" :key="itemDefinition.id">
-                        <th scope="row">{{ itemDefinition.id }}</th>
+                        <th scope="row">
+                            <router-link :to="getItemDefinitionLink(itemDefinition)">{{ itemDefinition.id }}</router-link>
+                        </th>
+
                         <td>
                             <span class="badge bg-primary text-light" v-for="itemTag in itemDefinition.tags" :key="itemTag">{{ itemTag }}</span>
                         </td>
+                        <td>{{ itemDefinition.maxCount }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -222,6 +227,15 @@ export default {
             fileReader.readAsText(event.target.files.item(0));
 
             event.target.value = null;
+        },
+
+        getItemDefinitionLink (itemDefinition) {
+            return {
+                name: 'itemDefinition',
+                params: {
+                    itemDefinitionId: itemDefinition.id
+                }
+            }
         }
     }
 }

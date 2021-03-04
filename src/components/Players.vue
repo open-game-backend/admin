@@ -21,7 +21,6 @@
                         <th scope="col">ID</th>
                         <th scope="col">Provider</th>
                         <th scope="col">Provider User ID</th>
-                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
 
@@ -32,8 +31,6 @@
                         </th>
                         <td>{{ player.provider }}</td>
                         <td>{{ player.providerUserId }}</td>
-                        <td>
-                        </td>
                     </tr>
                 </tbody>
             </table>

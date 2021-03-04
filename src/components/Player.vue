@@ -22,7 +22,7 @@
 
                 <tbody>
                     <tr>
-                        <td scope="row">
+                        <td>
                             <select class="form-select" v-model="newItem.itemDefinitionId">
                                 <option disabled value="">Select item ...</option>
                                 <option v-for="itemDefinition in itemDefinitions" :key="itemDefinition.id" :value="itemDefinition.id">
@@ -30,10 +30,10 @@
                                 </option>
                             </select>
                         </td>
-                        <td scope="row">
+                        <td>
                             <input type="number" min="1" v-model="newItem.itemCount" />
                         </td>
-                        <td scope="row">
+                        <td>
                             <button type="button" title="Add" v-on:click="addItem" class="btn btn-secondary btn-sm"
                                 :disabled="newItem.itemDefinitionId == '' || newItem.itemCount <= 0">
                                 <i class="fas fa-plus"></i>
@@ -44,18 +44,18 @@
                     <tr v-for="item in collection" :key="item.id">
                         <th scope="row">{{ item.id }}</th>
                         
-                        <td scope="row" v-if="selectedItem.itemDefinitionId === item.id">
+                        <td v-if="selectedItem.itemDefinitionId === item.id">
                             <input type="number" min="1" v-model="selectedItem.itemCount" />
                         </td>
-                        <td scope="row" v-else>
+                        <td v-else>
                             {{ item.count }}
                         </td>
                         
-                        <td scope="row" v-if="selectedItem.itemDefinitionId === item.id">
+                        <td v-if="selectedItem.itemDefinitionId === item.id">
                             <button type="button" title="Accept" v-on:click="saveItem(item)" class="btn btn-secondary btn-sm"><i class="fas fa-check"></i></button>
                             <button type="button" title="Cancel" v-on:click="cancel()" class="btn btn-secondary btn-sm"><i class="fas fa-times"></i></button>
                         </td>
-                        <td scope="row" v-else>
+                        <td v-else>
                             <button type="button" title="Edit" v-on:click="editItem(item)" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
                             <button type="button" title="Remove" v-on:click="removeItem(item)" class="btn btn-secondary btn-sm"><i class="fas fa-trash"></i></button>                           
                         </td>
