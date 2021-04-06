@@ -125,10 +125,12 @@
 </template>
 
 <script>
-import FileSaver from 'file-saver';
+import DownloadUploadMixin from '../mixins/DownloadUploadMixin'
 
 export default {
     name: 'Collection',
+
+    mixins: [ DownloadUploadMixin ],
 
     data: function() {
         return {
@@ -184,12 +186,6 @@ export default {
                 "LoadoutTypes.json");
         },
 
-        downloadAsJson: function (data, fileName) {
-            let json = JSON.stringify(data, null, 2);
-            let blob = new Blob([json], { type: "application/json;charset=utf-8" });
-            FileSaver.saveAs(blob, fileName);
-        },
-
         uploadItemDefinitions: function (event) {
             this.uploadAsJson(event, '/open-game-backend-collection/admin/itemdefinitions', (fileContents) => {
                 this.itemDefinitions = fileContents.itemDefinitions;
@@ -206,27 +202,6 @@ export default {
             this.uploadAsJson(event, '/open-game-backend-collection/admin/loadouttypes', (fileContents) => {
                 this.loadoutTypes = fileContents.loadoutTypes;
             });
-        },
-
-        uploadAsJson: function (event, url, onSuccess) {
-            if (event.target.files.length <= 0) {
-                event.target.value = null;
-                return;
-            }
-
-            const fileReader = new FileReader();
-
-            fileReader.onload = e => {
-                const fileContents = JSON.parse(e.target.result);
-
-                this.$api.put(url, fileContents,
-                    () => {
-                        onSuccess(fileContents);
-                    });
-            }
-            fileReader.readAsText(event.target.files.item(0));
-
-            event.target.value = null;
         },
 
         getItemDefinitionLink (itemDefinition) {

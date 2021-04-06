@@ -8,6 +8,9 @@
                 <router-link to="/collection" class="nav-link" v-bind:class="{ active: isRoute('/collection') }"><i class="fas fa-box-open"></i> Collection</router-link>
             </li>
             <li class="nav-item">
+                <router-link to="/quests" class="nav-link" v-bind:class="{ active: isRoute('/quests') }"><i class="fas fa-tasks"></i> Quests</router-link>
+            </li>
+            <li class="nav-item">
                 <router-link to="/servers" class="nav-link" v-bind:class="{ active: isRoute('/servers') }"><i class="fas fa-server"></i> Servers</router-link>
             </li>
             <li class="nav-item">

@@ -20,6 +20,7 @@ import Admins from './components/Admins.vue'
 import Logout from './components/Logout.vue'
 import Collection from './components/Collection.vue'
 import ItemDefinition from './components/ItemDefinition.vue'
+import Quests from './components/Quests.vue'
 
 // Create store.
 const store = new createStore({
@@ -53,6 +54,7 @@ const routes = [
     { path: '/players/:playerId', name: 'player', component: Player },
     { path: '/collection', component: Collection },
     { path: '/collection/:itemDefinitionId', name: 'itemDefinition', component: ItemDefinition },
+    { path: '/quests', component: Quests },
     { path: '/servers', component: Servers },
     { path: '/queue', component: Queue },
     { path: '/admins', component: Admins },
