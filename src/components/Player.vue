@@ -64,12 +64,43 @@
             </table>
         </div>
 
+        <p></p>
+
         <h4>Claimed Item Sets</h4>
 
-        <div>
+        <div v-if="claimedItemSets.length > 0">
             <ul>
                 <li v-for="claimedItemSet in claimedItemSets" :key="claimedItemSet">{{ claimedItemSet }}</li>
             </ul>
+        </div>
+        <div v-else>
+            No item sets claimed yet.
+        </div>
+
+        <p></p>
+        
+        <h4>Quests</h4>
+
+        <div>
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Quest</th>
+                        <th scope="col">Progress</th>
+                        <th scope="col">Generated At</th>
+                        <th scope="col">Completed At</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr v-for="quest in quests" :key="quest.id">
+                        <th scope="row">{{ quest.questDefinitionId }}</th>
+                        <td>{{ quest.currentProgress }}/{{ quest.requiredProgress }}</td>
+                        <td>{{ quest.generatedAt }}</td>
+                        <td>{{ quest.completedAt }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -83,6 +114,7 @@ export default {
             collection: [],
             itemDefinitions: [],
             claimedItemSets: [],
+            quests: [],
             newItem: {
                 itemDefinitionId: "",
                 itemCount: 1
@@ -119,6 +151,11 @@ export default {
             this.$api.get('/open-game-backend-collection/admin/claimeditemsets/' + this.playerId,
                 response => {
                     this.claimedItemSets = response.data.claimedItemSets;
+                });
+
+            this.$api.get('/open-game-backend-quests/admin/playerquests/' + this.playerId,
+                response => {
+                    this.quests = response.data.quests;
                 });
         },
 
