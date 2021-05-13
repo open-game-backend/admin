@@ -21,6 +21,7 @@ import Logout from './components/Logout.vue'
 import Collection from './components/Collection.vue'
 import ItemDefinition from './components/ItemDefinition.vue'
 import Quests from './components/Quests.vue'
+import SecretKeys from './components/SecretKeys.vue'
 
 // Create store.
 const store = new createStore({
@@ -58,6 +59,7 @@ const routes = [
     { path: '/servers', component: Servers },
     { path: '/queue', component: Queue },
     { path: '/admins', component: Admins },
+    { path: '/secretkeys', component: SecretKeys },
     { path: '/logout', component: Logout }
 ]
 

@@ -20,6 +20,9 @@
                 <router-link to="/admins" class="nav-link" v-bind:class="{ active: isRoute('/admins') }"><i class="fas fa-users-cog"></i> Admins</router-link>
             </li>
             <li class="nav-item">
+                <router-link to="/secretkeys" class="nav-link" v-bind:class="{ active: isRoute('/secretkeys') }"><i class="fas fa-key"></i> Keys</router-link>
+            </li>
+            <li class="nav-item">
                 <router-link to="/logout" class="nav-link" v-bind:class="{ active: isRoute('/logout') }"><i class="fas fa-sign-out-alt"></i> Logout</router-link>
             </li>
 
