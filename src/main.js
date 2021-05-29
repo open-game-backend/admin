@@ -81,9 +81,7 @@ const app = createApp(App)
     .use(router)
     .use(store)
 
-// Create API.
-const api = new API();
-app.config.globalProperties.$api = api
+
 
 // Load config.
 // https://stackoverflow.com/questions/60114173/vue-js-with-an-external-configuration-file
@@ -91,6 +89,10 @@ fetch(process.env.BASE_URL + "config.json")
     .then((response) => {
         response.json().then((config) => {
             app.config.globalProperties.$config = config
+
+            // Create API.
+            const api = new API(config);
+            app.config.globalProperties.$api = api
 
             // Mount app.
             app.mount('#app')

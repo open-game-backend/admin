@@ -3,9 +3,9 @@ import PubSub from 'pubsub-js'
 import Topics from './topics'
 
 export default class API {
-    constructor() {
+    constructor(config) {
         this._axios = axios.create({
-            baseURL: 'http://localhost:9000'
+            baseURL: config.baseUrl
         });
     }
 
